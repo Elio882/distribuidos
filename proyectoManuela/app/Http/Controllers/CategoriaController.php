@@ -41,7 +41,9 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $categoria = categoria::find($id);
+        return view('categorias.mostrar')
+                ->with('categoria',$categoria);
     }
 
     /**
@@ -49,7 +51,9 @@ class CategoriaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categoria = categoria::find($id);
+        return view('categorias.editar')
+                ->with('categoria',$categoria);
     }
 
     /**
@@ -57,7 +61,10 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $categoria = categoria::find($id);
+        $categoria->nombre = $request['nombre']; 
+        $categoria->save(); // si ya existe sobre la llave va a crear, si no existe la llave va a crear
+        return redirect()->route('categoria_index');
     }
 
     /**

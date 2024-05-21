@@ -24,7 +24,7 @@ class Autor extends Model
             'cantidad',
             'created_at',
             'udated_at'
-        ); // indica la rerlacion de muchos
+        ); // indica la rerlacion de muchos a muchos 
     }
     //with pivot los archivos que se mostraran de los atributos de relacion que se tiene
 }

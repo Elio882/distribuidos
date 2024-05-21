@@ -26,7 +26,11 @@
                     <td> 
                         {{Carbon\Carbon::create($categoria->created_at)->format('d/m/Y H:i')}} 
                     </td>
-                    <td>  </td>
+                    <td> 
+                        <a href="{{route('categoria_mostrar',['id'=>$categoria->id])}}">Detalles</a>
+                        {{Html::link(route('categoria_editar',['id'=>$categoria->id]),'editar2')}}
+                        Eliminar
+                    </td>
                 </tr>
             @endforeach
         </tbody>

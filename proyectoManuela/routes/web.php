@@ -16,4 +16,8 @@ use App\Http\Controllers\CategoriaController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('categorias',[CategoriaController::class,'index'])->name('categoria_index');
+Route::get('',[CategoriaController::class,'index'])->name('categoria_index');
+Route::get('categorias/mostrar/{id}',[CategoriaController::class,'show'])->name(('categoria_mostrar'));
+Route::get('categorias/{id}/editar',[CategoriaController::class,'edit'])->name(('categoria_editar'));
+Route::post('categorias/actualizar/{id}',[CategoriaController::class,'update'])->name(('categoria_actualizar'));
+// con el controller de categoria con el metoo show
