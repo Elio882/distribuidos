@@ -6,7 +6,7 @@ use App\Models\Autor;
 use Illuminate\Http\Request;
 use App\Models\libro;
 use App\Models\categoria;
-
+use App\Http\Requests\StoreLibroRequest;
 class LibroController extends Controller
 {
     /**
@@ -35,8 +35,19 @@ class LibroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLibroRequest $request)
     {
+        //$request->validate(reglas[,mensajes[,atributos]]);
+        // $request->validate([
+        //     'titulo'    => 'required|max:50|min:2',
+        //     'precio'    => 'required|numeric|min:5'
+
+        // ],[
+        //     'titulo.required'  => 'campo obligatorio',
+        //     'precio.min'    => 'el precio debe ser mayor a Bs. 5'
+        // ],[
+        //     'titulo'    => 'title'
+        // ]);
         $libro = Libro::guardar($request);
         $autor = Autor::find($request['autor']);
         $libro->autores()->attach($autor,[
@@ -55,7 +66,9 @@ class LibroController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $libro = Libro::find($id);
+        return view('libros.detalles')
+                ->with('libro', $libro);
     }
 
     /**
@@ -63,7 +76,9 @@ class LibroController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $libro = Libro::find($id);
+        return view('libros.editar')
+                ->with('libro', $libro);
     }
 
     /**
@@ -71,7 +86,14 @@ class LibroController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $libro = Libro::find($id);
+        $libro->titulo = $request['titulo'];
+        $libro->editorial = $request['editorial'];
+        $libro->precio = $request['precio'];
+        $libro->volumen = $request['volumen'];
+        $libro->paginas = $request['paginas'];
+        $libro->save();
+        return redirect()->route('libro.index');
     }
 
     /**

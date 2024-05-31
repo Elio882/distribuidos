@@ -23,17 +23,21 @@
             <tr>
                 <td>{{$i++}}</td>
                 <td>{{$libro->titulo}}</td>
-                <td>{{$libro->autores}}</td>
+                <td>
+                @foreach($libro->autores as $autor)
+                    {{ $autor->nombres ." ".$autor->apellidos }},<br> 
+                @endforeach
+                </td>
                 <td>{{$libro->precio}}</td>
                 <td>
-                    detalles
-                    editar
+				<a href="{{ route('libro.detalles', ['id'=>$libro->id]) }}">Detalles</a> |
+				{{ Html::link(route('libro.editar', ['id'=>$libro->id]), 'Editar') }}
                     eliminar
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{Html::link(route('libro.create','Añadir nuevo libro'))}}
+    {{Html::link(route('libro.create'),'Añadir nuevo libro')}}
 </body>
 </html>
