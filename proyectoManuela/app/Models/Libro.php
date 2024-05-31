@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Autor;
 
 class libro extends Model
 {
@@ -39,8 +40,23 @@ class libro extends Model
             'fec_publicacion',
             'cantidad',
             'created_at',
-            'udated_at'
+            'updated_at'
         );
+    }
+
+    //para guardar libros
+
+    public static function guardar ($request){
+        $libro = Libro::create([
+            'titulo' => $request['titulo'],
+            'editorial' => $request['editorial'],
+            'anio' => $request['anio'],
+            'paginas' => $request['paginas'],
+            'volumen' => $request['volumen'],
+            'precio' => $request['precio'],
+            'categoria_id' => $request['categoria_id'],
+        ]);
+        return $libro;
     }
 }
 

@@ -11,7 +11,7 @@
         {{Form::label('nombre', 'Nombre:')}}
         {{ Form::text('nombre',$categoria->nombre,['placeholder'=>'introduzca la categoria','style'=>'color:red']
         )}} <!- siempre utilizar el valor del atributo que se dio en la BD -->
-        {{ Form::submit('Enviar')}} {{Html::link(route('categoria_index'),'cancelar')}}
+        {{ Form::submit('Enviar')}} {{Html::link(route('categoria_index'),'cancelarx')}}
     {{ Form::close() }}
 </body>
 </html>
